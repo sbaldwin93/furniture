@@ -11,7 +11,8 @@ module.exports = {
 			length: req.body.length,
 			width: req.body.width,
 			height: req.body.height,
-			price: req.body.price
+			price: req.body.price,
+			image: req.body.image
 		});
 		items.save(function(err, allItems) {
 			if(err) {
@@ -42,5 +43,5 @@ module.exports = {
 				res.json(doc);
 			}
 		})
-	},
+	}	
 };

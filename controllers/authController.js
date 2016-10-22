@@ -3,12 +3,13 @@ var User = require('../models/user');
 var performLogin = function(req, res, next, user) {
 	req.login(user, function(err) {
 		if(err) return next(err);
-		return res.redirect('/html/home.html');
+		//return res.redirect('/html/index.html');
+		return res.redirect('/');
 	});
 };
 var authenticationController = {
 	login: function(req, res) {
-		res.sendFile('/html/home.html', {root: './public'});
+		res.sendFile('/html/login.html', {root: './public'});
 	},
 	processLogin: function(req, res, next) {
 		var authFunction = passport.authenticate('local', function(err, user, info) {
@@ -22,6 +23,7 @@ var authenticationController = {
 	},
 	processSignup: function(req, res, next) {
 		var user = new User({
+			name    : req.body.name,
 			username: req.body.username,
 			password: req.body.password
 		});
