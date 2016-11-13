@@ -156,6 +156,7 @@ angular.module('furniture')
 		    console.log(item.name);
 		    $scope.name = item.name;
 		    $scope.picture = item.image;
+		    $scope.description = item.description;
 
 	    };
 
