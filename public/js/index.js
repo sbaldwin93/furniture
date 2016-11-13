@@ -1,13 +1,12 @@
 (function() {
-angular.module('furniture', ['ngRoute'])
+angular.module('furniture', ['ngRoute', 'ngFileUpload'])
 angular.module('furniture')
-	.controller('mainController', ['$scope', '$http', function($scope, $http) {
+	.controller('mainController', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout) {
 		$scope.loggedIn = undefined;
 		var itemsArray = [];
 		var authCheck = function() {
 			$http.get('/api/me').then(function(returnData) {
 				$scope.user = returnData.data;
-				console.log(returnData.data);
 				if(returnData.data !== "") {
 					$scope.loggedIn = true;
 				}
@@ -20,105 +19,167 @@ angular.module('furniture')
 				if($scope.loggedIn === false) {
 					$scope.auth = "R | F";
 				}
-				console.log($scope.loggedIn);
-				console.log($scope.auth);
 			});
 		};
 		authCheck();
-
-
-		$scope.getId = function(item) {
-			console.log(item._id);
-		}
-
-
-
-		var refresh = function() {
+		var refresh = function(id) {
 			var data = {}
 			$http.get('/api/items/get', data).success(function(response) {
 				$scope.itemsArray = response;
 				$scope.item = "";
-			})
+			});
 		};
 		refresh();
-		$scope.addDining = function() {
-			var itemsArray = [];
-			var request = {
-				name: $scope.item.name,
-				type: 'dining',
-				length: $scope.item.length,
-				width: $scope.item.width,
-				height: $scope.item.height,
-				price: $scope.item.price
-			}
-			$http.post('/api/items/post', request).success(function(response) {
-				$scope.itemsArray.push(response);
-				console.log(response._id);
-				refresh();
-			}).error(function(error) {
-				console.log(error);
-			});
+		$scope.addDining = function(file) {
+			if(file) {
+				$scope.itemsArray = [];
+				file.upload = Upload.upload({
+		      		url: '/api/items/post',
+		      		data: {
+		      			file: file, 
+		      			name: $scope.item.name, 
+		      			type: 'dining',
+		      			lengt: $scope.item.lengt,
+		      			width: $scope.item.width,
+		      			height: $scope.item.height,
+		      			price: $scope.item.price,
+		      			location: $scope.item.location,
+		      			description: $scope.item.location,  
+		      			image: $scope.item.image
+		      		},
+		      		method: 'POST'
+		    	});
+		    	file.upload.then(function (response) {
+		      		$timeout(function () {
+			        	file.result = response.data;
+			        	$scope.itemsArray.push(response.data)
+			        	refresh()
+		      		});
+		      	})
+	    	}
 		};
-		$scope.addLiving = function() {
-			var itemsArray = [];
-			var request = {
-				name: $scope.item.name,
-				type: 'living',
-				length: $scope.item.length,
-				width: $scope.item.width,
-				height: $scope.item.height,
-				price: $scope.item.price
-			}
-			$http.post('/api/items/post', request).success(function(response) {
-				$scope.itemsArray.push(response);
-				refresh();
-			}).error(function(error) {
-				console.log(error);
-			});
+		$scope.addLiving = function(file) {
+			if(file) {
+				$scope.itemsArray = [];
+				file.upload = Upload.upload({
+		      		url: '/api/items/post',
+		      		data: {
+		      			file: file, 
+		      			name: $scope.item.name, 
+		      			type: 'living',
+		      			lengt: $scope.item.lengt,
+		      			width: $scope.item.width,
+		      			height: $scope.item.height,
+		      			price: $scope.item.price,
+		      			location: $scope.item.location,
+		      			description: $scope.item.location,  
+		      			image: $scope.item.image
+		      		},
+		      		method: 'POST'
+		    	});
+		    	file.upload.then(function (response) {
+		      		$timeout(function () {
+			        	file.result = response.data;
+			        	$scope.itemsArray.push(response.data)
+			        	refresh()
+		      		});
+		      	})
+	    	}
 		};
-		$scope.addOffice = function() {
-			var itemsArray = [];
-			var request = {
-				name: $scope.item.name,
-				type: 'office',
-				length: $scope.item.length,
-				width: $scope.item.width,
-				height: $scope.item.height,
-				price: $scope.item.price
-			}
-			$http.post('/api/items/post', request).success(function(response) {
-				$scope.itemsArray.push(response);
-				refresh();
-			}).error(function(error) {
-				console.log(error);
-			});
+		$scope.addOffice = function(file) {
+			if(file) {
+				$scope.itemsArray = [];
+				file.upload = Upload.upload({
+		      		url: '/api/items/post',
+		      		data: {
+		      			file: file, 
+		      			name: $scope.item.name, 
+		      			type: 'office',
+		      			lengt: $scope.item.lengt,
+		      			width: $scope.item.width,
+		      			height: $scope.item.height,
+		      			price: $scope.item.price,
+		      			location: $scope.item.location,
+		      			description: $scope.item.location,  
+		      			image: $scope.item.image
+		      		},
+		      		method: 'POST'
+		    	});
+		    	file.upload.then(function (response) {
+		      		$timeout(function () {
+			        	file.result = response.data;
+			        	$scope.itemsArray.push(response.data)
+			        	refresh()
+		      		});
+		      	})
+	    	}
 		};
-		$scope.addBedroom = function() {
-			var itemsArray = [];
-			var request = {
-				name: $scope.item.name,
-				type: 'bedroom',
-				length: $scope.item.length,
-				width: $scope.item.width,
-				height: $scope.item.height,
-				price: $scope.item.price
-			}
-			$http.post('/api/items/post', request).success(function(response) {
-				$scope.itemsArray.push(response);
-				refresh();
-			}).error(function(error) {
-				console.log(error);
-			});
+		$scope.addBedroom = function(file) {
+			if(file) {
+				$scope.itemsArray = [];
+				file.upload = Upload.upload({
+		      		url: '/api/items/post',
+		      		data: {
+		      			file: file, 
+		      			name: $scope.item.name, 
+		      			type: 'bedroom',
+		      			lengt: $scope.item.lengt,
+		      			width: $scope.item.width,
+		      			height: $scope.item.height,
+		      			price: $scope.item.price,
+		      			location: $scope.item.location,
+		      			description: $scope.item.location,  
+		      			image: $scope.item.image
+		      		},
+		      		method: 'POST'
+		    	});
+		    	file.upload.then(function (response) {
+		      		$timeout(function () {
+			        	file.result = response.data;
+			        	$scope.itemsArray.push(response.data)
+			        	refresh()
+		      		});
+		      	})
+	    	}
 		};
-	}]);
+		$scope.delete = function(id) {
+			$http.delete('/api/items/delete/' + id).success(function(response) {
+				refresh();
+			});	
+		};
+
+		$scope.name = undefined;
+		$scope.picture = undefined;
+		$scope.display = function(item) {
+		    $scope.item = item;
+		    $scope.item = "";
+		    console.log(item.name);
+		    $scope.name = item.name;
+		    $scope.picture = item.image;
+
+	    };
+
+		
+
+		
+
+
+
+
+
+}]);
 angular.module('furniture')
-	.config(['$routeProvider', function($routeProvider) {
+.config(['$routeProvider', function($routeProvider) {
 		$routeProvider
 		.when('/', {
 			templateUrl: '/html/main.html', 
 			controller: 'mainController'
 		})
 		.when('/main', {
+			templateUrl: '/html/main.html', 
+			controller: 'mainController'
+		})
+		.when('/home', {
 			templateUrl: '/html/main.html', 
 			controller: 'mainController'
 		})
@@ -141,6 +202,6 @@ angular.module('furniture')
 		.when('/seeAll', {
 			templateUrl: '/html/seeAll.html', 
 			controller: 'mainController'
-		})
-	}])
+		})		
+	}]);
 }());

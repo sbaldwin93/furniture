@@ -1,28 +1,47 @@
-var User = require('../models/user');
 var Item = require('../models/items');
+var User = require('../models/user');
 var fs = require('fs-extra');
 var path = require('path');
 
 module.exports = {
-	postItems: function(req, res) {
-		var items = new Item({
+	/////////////////// WORKING ON item.image ////////////////////
+	postItem: function(req, res) {
+		var item = new Item({
 			name: req.body.name,
 			type: req.body.type,
-			length: req.body.length,
+			lengt: req.body.lengt,
 			width: req.body.width,
 			height: req.body.height,
 			price: req.body.price,
+			location: req.body.location,
+			description: req.body.description,
 			image: req.body.image
 		});
-		items.save(function(err, allItems) {
+		var file = req.files.file;
+		console.log("user " + " fs submitting ", file);
+		var uploadDate = new Date();
+		var tempPath = file.path;
+		var targetPath = path.join(__dirname, "../uploads/" + uploadDate + file.name);
+		var savePath = "/uploads/" + uploadDate + file.name;
+		fs.rename(tempPath, targetPath, function(err) {
 			if(err) {
-				res.error(err);
+				console.log(err)
 			}
 			else {
-				res.json(allItems);
+				item.image = savePath;
+				item.save(function(err, allItems) {
+					if(err) {
+						res.error(err);
+					}
+					else {
+						res.json(allItems);
+					}
+				})
 			}
-		})
+		})	
 	},
+	/////////////////// WORKING ON item.image ////////////////////
+	
 	getItems: function(req, res) {
 		Item.find({}).exec(function(err, allItems) {
 			if(err) {
@@ -31,8 +50,8 @@ module.exports = {
 			else {
 				res.json(allItems)
 			}
-		}
-	)},
+		})
+	},
 	deleteItems: function(req, res) {
 		var id = req.params.id;
 		Item.findOneAndRemove({_id: id}, function(err, doc) {
@@ -43,5 +62,28 @@ module.exports = {
 				res.json(doc);
 			}
 		})
-	}	
+	}
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -26,8 +26,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // AUTHENTICATION ROUTES \\
 app.use('/node_modules', express.static(__dirname + "/node_modules"));
-app.use('/images', express.static(__dirname + "/images"));
 app.use('/uploads', express.static(__dirname + "/uploads"));
+app.use('/photos', express.static(__dirname + "/photos"));
 app.get('/auth/login', authenticationController.login);
 app.post('/auth/login', authenticationController.processLogin);
 app.post('/auth/signup', authenticationController.processSignup);
@@ -36,12 +36,11 @@ app.get('/auth/logout', authenticationController.logout);
 app.get('/api/me', function(req, res){
 	res.send(req.user)
 });
-//app.use(passportConfig.ensureAuthenticated);
 app.get('/', function(req, res){
   res.sendFile('/html/index.html', {root : './public'})
 });
 app.get('/api/items/get', apiController.getItems);
-app.post('/api/items/post', apiController.postItems);
+app.post('/api/items/post', multipartMiddleware, apiController.postItem);
 app.delete('/api/items/delete/:id', apiController.deleteItems);
 // SERVER \\
 var port = 3000

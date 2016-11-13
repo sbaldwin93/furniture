@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "^1.5.5",
     "angular-route": "^1.5.7",
+    "angular-ui-bootstrap": "^2.2.0",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.1",
     "bootstrap": "^3.3.6",

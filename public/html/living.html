@@ -1,44 +1,66 @@
 <div class="container-fluid">
 	<h3 class="type">L I V I N G</h3>
-		<div class="days-con">
-		<div class="container-fluid" id="move-btn">
-		<div class="container-fluid" id="move-btn" ng-if="loggedIn">
+	<div class="days-con">
+		<div id="move-btn" ng-if="loggedIn">
 			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample" id="add-btn">+</button>
 		</div>
 		<div class="collapse" id="collapseExample1">
 		  	<h4 class="item-con">N a m e</h4>
 		  	<input class="form-control" ng-model="item.name">
-		  	<h4 class="item-con">l e n g t h</h4>
-		  	<input class="form-control" ng-model="item.length">
+		  	<h4 class="item-con">L e n g t h</h4>
+		  	<input class="form-control" ng-model="item.lengt">
 		  	<h4 class="item-con">W i d t h</h4>
 		  	<input class="form-control" ng-model="item.width">
 		  	<h4 class="item-con">H e i g h t</h4>
 		  	<input class="form-control" ng-model="item.height">
 		  	<h4 class="item-con">P r i c e</h4>
 		  	<input class="form-control" ng-model="item.price">
-		  	<div class="main-photo"></div>
-		  	<div class="photos-cont">
-			  	<div class="col-xs-3 col-md-3" id="photo2"></div>
-				<div class="col-xs-3 col-md-3" id="photo3"></div>
-				<div class="col-xs-3 col-md-3" id="photo4"></div>
-				<div class="col-xs-3 col-md-3" id="photo5"></div>
-		  	</div>
-		  	<button class="btn btn-default" id="add-item" ng-click="addLiving()">Add Item</button>
+		  	<h4 class="item-con">L o c a t i o n</h4>
+		  	<input class="form-control" ng-model="item.location">
+		  	<h4 class="item-con">D e s c r i p t i o n</h4>
+		  	<textarea class="form-control" ng-model="item.description"></textarea>
+
+			<div class="imgUploadCon">
+				<input type="file" ngf-select ng-model="item.image" name="file" accept="image/*" ngf-max-size="2MB">
+			</div>
+
+			<img ngf-thumbnail="item.image" id="photo1"><br> 
+			<button ng-click="item.image = null" ng-show="item.image">Remove</button>
+
+			
+		  	<button class="btn btn-default" id="add-item" ng-click="addDining(item.image)">Add Item</button>
 		</div>
 	</div>
-	<div class="theItems" ng-repeat="item in itemsArray | filter : {type: 'living'} ">
-		<div class="col-xs-12 col-md-3" id="photo1">
-			<h4 class="item-cont">{{item.name}}</h4>
-			<h4 class="item-cont">L {{item.length}}</h4>
-			<h4 class="item-cont">W {{item.width}}</h4>
-			<h4 class="item-cont">H {{item.height}}</h4>
-			<h4 class="item-cont">${{item.price}}</h4>
+</div>
+<div class="container-fluid">
+	<div class="col-xs-12 col-sm-6 col-md-3" id="theItems" ng-repeat="item in itemsArray | filter : {type: 'living'}">
+		<img src="{{item.image}}" id="item-pic">
+		<div id="spread" ng-click="display(item)" data-toggle="modal" data-target="#itemModal">
+			<div class="price-con">
+				<h5 id="price">${{item.price}}.00</h5>
+			</div>
+			<div id="dimensions">
+				<h6 class="item-cont" id="length">L<br> {{item.lengt}}</h6>
+				<h6 class="item-cont" id="width">W<br> {{item.width}}</h6>
+				<h6 class="item-cont" id="height">H<br> {{item.height}}</h6>
+			</div>
 		</div>
-		<div class="photos-cont">
-			<img class="col-xs-3 col-md-3" id="photo2" ng-src="{{item.image}}" ng-click="getId(item)">
-			<div class="col-xs-3 col-md-3" id="photo3"></div>
-			<div class="col-xs-3 col-md-3" id="photo4"></div>
-			<div class="col-xs-3 col-md-3" id="photo5"></div>
-		</div>
+		<!-- Login Modal -->
+		<div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="login-title" ng-model="name">{{name}}</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<img ng-model="picture" ng-src="{{picture}}" id="item-pic">
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
 	</div>
 </div>

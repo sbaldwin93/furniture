@@ -1,3 +1,6 @@
+body {
+	overflow-x: hidden;
+}
 #title {
 	text-decoration: none;
 	color: black;
@@ -44,7 +47,7 @@
 		rgba(38, 38, 38, 0.60),
 		rgba(38, 38, 38, 0.60)
 		),
-	url(/images/pic1.jpg);
+	url(/photos/pic1.jpg);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -58,7 +61,7 @@
 		rgba(38, 38, 38, 0.60),
 		rgba(38, 38, 38, 0.60)
 		),
-	url(/images/pic2.jpg);
+	url(/photos/pic2.jpg);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -72,7 +75,7 @@
 		rgba(38, 38, 38, 0.60),
 		rgba(38, 38, 38, 0.60)
 		),
-	url(/images/pic3.jpg);
+	url(/photos/pic3.jpg);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -86,7 +89,7 @@
 		rgba(38, 38, 38, 0.75),
 		rgba(38, 38, 38, 0.75)
 		),
-	url(/images/pic4.jpg);
+	url(/photos/pic4.jpg);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -111,6 +114,7 @@
 	background-color: white;
 	color: green;
 	border: 1px solid green;
+	margin-bottom: 10px;
 }
 #add-item {
 	width: 100%;
@@ -118,25 +122,16 @@
 	color: green;
 	border: 1px solid green;
 	margin-top: 10px;
+	margin-bottom: 10px;
 }
 #move-btn {
 	width: 100%;
 	text-align: center;
 }
-.theItems {
-	width: 100%;
-	border-bottom: 1px solid black;
-}
 .hide {
 	color: white;
 }
-
-
-
 .item-con {
-	font-family: "Times New Roman", Georgia, Serif;
-}
-.item-cont {
 	font-family: "Times New Roman", Georgia, Serif;
 }
 #photo1 {
@@ -163,6 +158,119 @@
 	width: 200px;
 	border: 1px solid black;
 }
+
+/* temp upload css*/
+.thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progress {
+    line-height: 15px;
+}
+}
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}
+
+#theItems {
+	border: 1px solid white;
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.nameAlign {
+	width: 100%;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+#cont-align {
+	position: absolute;
+	top: 40px;
+	width: 100%;
+}
+
+#item-pic {
+	position: relative;
+	width: 100%;
+	height: 270px;
+}
+
+#item-conti {
+	width: 100%;
+}
+#spread {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+}
+#dimensions {
+	float: right;
+	height: 40px;
+	display: inline-block;
+	background-color: black;
+	margin-top: 230px;
+	opacity: 0.7;
+	border-top-left-radius: 15px;
+}
+.item-cont {
+	display: inline-block;
+	color: white;
+	text-align: center;	
+}
+#height {
+	float: right;
+	display: inline-block;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#width {
+	float: right;
+	display: inline-block;
+	padding-right: 10px;
+}
+#length {
+	float: right;
+	display: inline-block;
+	padding-right: 10px;
+
+}
+#price {
+	color: #00ff00;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.price-con {
+	display: inline-block;
+	height: 45px;
+	background-color: black;
+	opacity: 0.7;
+	border-bottom-right-radius: 15px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+
+
+
+
 
 
 

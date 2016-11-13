@@ -3,10 +3,13 @@ var Schema = mongoose.Schema;
 var itemSchema = new Schema({
 	name            : {type: String},
 	type            : {type: String},
-	length          : {type: String},
+	lengt           : {type: String},
 	width           : {type: String},
 	height          : {type: String},
-	price           : {type: String}
+	price           : {type: String},
+	location        : {type: String},
+	description     : {type: String},
+	image           : {type: String}
 });
 
 var Item = mongoose.model('item', itemSchema);
