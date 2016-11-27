@@ -1,5 +1,6 @@
 var Item = require('../models/items');
 var User = require('../models/user');
+var Submission = require('../models/submission')
 var fs = require('fs-extra');
 var path = require('path');
 
@@ -48,22 +49,41 @@ module.exports = {
 				res.error(err);
 			}
 			else {
-				res.json(allItems)
+				res.json(allItems);
 			}
 		})
 	},
-	deleteItems: function(req, res) {
-		var id = req.params.id;
-		Item.findOneAndRemove({_id: id}, function(err, doc) {
+
+
+
+	
+	getSubmissions: function(req, res) {
+		Submission.find({}).exec(function(err, allSubmissions) {
+			if(err) {
+				res.error(err);
+			}
+			else {
+				res.json(allSubmissions);
+			}
+		})
+	},
+	postSubmission: function(req, res) {
+		var submission = new Submission({
+			name: req.body.name,
+			email: req.body.email,
+			number: req.body.number,
+			city: req.body.city,
+			state: req.body.state
+		})
+		submission.save(function(err, allSubmissions) {
 			if(err) {
 				console.log(err);
 			}
 			else {
-				res.json(doc);
+				res.json(allSubmissions);
 			}
 		})
 	}
-
 };
 
 

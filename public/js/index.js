@@ -3,7 +3,11 @@ angular.module('furniture', ['ngRoute', 'ngFileUpload'])
 angular.module('furniture')
 	.controller('mainController', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout) {
 		$scope.loggedIn = undefined;
+		$scope.name = undefined;
+		$scope.picture = undefined;
+		$scope.description = undefined;
 		var itemsArray = [];
+		var submissionsArray = [];
 		var authCheck = function() {
 			$http.get('/api/me').then(function(returnData) {
 				$scope.user = returnData.data;
@@ -44,8 +48,9 @@ angular.module('furniture')
 		      			height: $scope.item.height,
 		      			price: $scope.item.price,
 		      			location: $scope.item.location,
-		      			description: $scope.item.location,  
-		      			image: $scope.item.image
+		      			description: $scope.item.description,  
+		      			image: $scope.item.image,
+		      			status: undefined
 		      		},
 		      		method: 'POST'
 		    	});
@@ -57,6 +62,7 @@ angular.module('furniture')
 		      		});
 		      	})
 	    	}
+
 		};
 		$scope.addLiving = function(file) {
 			if(file) {
@@ -72,8 +78,9 @@ angular.module('furniture')
 		      			height: $scope.item.height,
 		      			price: $scope.item.price,
 		      			location: $scope.item.location,
-		      			description: $scope.item.location,  
-		      			image: $scope.item.image
+		      			description: $scope.item.description,  
+		      			image: $scope.item.image,
+		      			status: undefined
 		      		},
 		      		method: 'POST'
 		    	});
@@ -100,8 +107,9 @@ angular.module('furniture')
 		      			height: $scope.item.height,
 		      			price: $scope.item.price,
 		      			location: $scope.item.location,
-		      			description: $scope.item.location,  
-		      			image: $scope.item.image
+		      			description: $scope.item.description,  
+		      			image: $scope.item.image,
+		      			status: undefined
 		      		},
 		      		method: 'POST'
 		    	});
@@ -128,8 +136,9 @@ angular.module('furniture')
 		      			height: $scope.item.height,
 		      			price: $scope.item.price,
 		      			location: $scope.item.location,
-		      			description: $scope.item.location,  
-		      			image: $scope.item.image
+		      			description: $scope.item.description,  
+		      			image: $scope.item.image,
+		      			status: undefined
 		      		},
 		      		method: 'POST'
 		    	});
@@ -142,28 +151,36 @@ angular.module('furniture')
 		      	})
 	    	}
 		};
-		$scope.delete = function(id) {
-			$http.delete('/api/items/delete/' + id).success(function(response) {
-				refresh();
-			});	
-		};
-
-		$scope.name = undefined;
-		$scope.picture = undefined;
-		$scope.display = function(item) {
+		$scope.display = function(item, submission) {
 		    $scope.item = item;
 		    $scope.item = "";
-		    console.log(item.name);
 		    $scope.name = item.name;
 		    $scope.picture = item.image;
 		    $scope.description = item.description;
-
+		    $scope.submission = submission;
 	    };
-
-		
-
-		
-
+		var refreshSub = function(id) {
+			var data = {};
+			$http.get('/api/submissions/get', data).success(function(response) {
+				$scope.submissionsArray = response;
+				$scope.submission = "";
+			})
+		};
+		refreshSub()
+		$scope.postSubmission = function(submission) {
+			$scope.submissionsArray = [];
+			var request = {
+				name: $scope.submission.name,
+				email: $scope.submission.email,
+				number: $scope.submission.number,
+				city: $scope.submission.city,
+				state: $scope.submission.state
+			}
+			$http.post('api/submissions/post', request).success(function(response) {
+				$scope.submissionsArray.push(response);
+				refreshSub()
+			})
+		};
 
 
 
@@ -203,6 +220,31 @@ angular.module('furniture')
 		.when('/seeAll', {
 			templateUrl: '/html/seeAll.html', 
 			controller: 'mainController'
-		})		
+		})
+		.when('/inventory', {
+			templateUrl: '/html/inventory.html', 
+			controller: 'mainController'
+		})
 	}]);
 }());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

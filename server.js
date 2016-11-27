@@ -41,7 +41,8 @@ app.get('/', function(req, res){
 });
 app.get('/api/items/get', apiController.getItems);
 app.post('/api/items/post', multipartMiddleware, apiController.postItem);
-app.delete('/api/items/delete/:id', apiController.deleteItems);
+app.get('/api/submissions/get', apiController.getSubmissions);
+app.post('/api/submissions/post', apiController.postSubmission);
 // SERVER \\
 var port = 3000
 app.listen(port, function(){

@@ -9,7 +9,8 @@ var itemSchema = new Schema({
 	price           : {type: String},
 	location        : {type: String},
 	description     : {type: String},
-	image           : {type: String}
+	image           : {type: String},
+	status          : {type: Boolean}
 });
 
 var Item = mongoose.model('item', itemSchema);

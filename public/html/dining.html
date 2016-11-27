@@ -19,30 +19,28 @@
 		  	<input class="form-control" ng-model="item.location">
 		  	<h4 class="item-con">D e s c r i p t i o n</h4>
 		  	<textarea class="form-control" ng-model="item.description"></textarea>
-
 			<div class="imgUploadCon">
 				<input type="file" ngf-select ng-model="item.image" name="file" accept="image/*" ngf-max-size="2MB">
 			</div>
-
-			<img ngf-thumbnail="item.image" id="photo1"><br> 
-			<button ng-click="item.image = null" ng-show="item.image">Remove</button>
-
-			
-		  	<button class="btn btn-default" id="add-item" ng-click="addDining(item.image)">Add Item</button>
+			<div class="thumb-img">
+				<img ngf-thumbnail="item.image" id="photo1"><br>
+			<button ng-click="item.image = null" ng-show="item.image" class="btn btn-danger" id="img-thumb-remove">Remove</button>
+			</div>
+		  	<button class="btn btn-default" id="add-item" ng-click="addDining(item.image)" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">Add Item</button>
 		</div>
 	</div>
 </div>
-<div class="container-fluid">
+<div>
 	<div class="col-xs-12 col-sm-6 col-md-3" id="theItems" ng-repeat="item in itemsArray | filter : {type: 'dining'}">
 		<img src="{{item.image}}" id="item-pic">
 		<div id="spread" ng-click="display(item)" data-toggle="modal" data-target="#itemModal">
 			<div class="price-con">
-				<h5 id="price">${{item.price}}.00</h5>
+				<h4 id="price">${{item.price}}.00</h4>
 			</div>
 			<div id="dimensions">
-				<h6 class="item-cont" id="length">L<br> {{item.lengt}}</h6>
-				<h6 class="item-cont" id="width">W<br> {{item.width}}</h6>
-				<h6 class="item-cont" id="height">H<br> {{item.height}}</h6>
+				<h5 class="item-cont" id="length">L<br> {{item.lengt}}</h5>
+				<h5 class="item-cont" id="width">W<br> {{item.width}}</h5>
+				<h5 class="item-cont" id="height">H<br> {{item.height}}</h5>
 			</div>
 		</div>
 		<!-- Login Modal -->
@@ -54,16 +52,39 @@
 		        <h4 class="modal-title" id="login-title" ng-model="name">{{name}}</h4>
 		      </div>
 		      <div class="modal-body">
-		      	<img ng-model="picture" ng-src="{{picture}}" id="item-pic">
+		      	<img ng-model="picture" ng-src="{{picture}}" id="item-pics">
 		      </div>
 		      <div class="modal-footer">
+		      	<div class="item-d-con">
 		      	<h5 ng-model="description" id="idd">{{description}}</h5>
+		      	</div>
+		      	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample" id="want-btn">I want this!</button>
+
+
+			    <div class="collapse" id="collapseExample2">
+				  	<h5 class="want-con">N a m e</h5>
+				  	<input class="form-control" ng-model="submission.name">
+				  	<h5 class="want-con">E m a i l</h5>
+				  	<input class="form-control" ng-model="submission.email">
+				  	<h5 class="want-con">N u m b e r</h5>
+				  	<input class="form-control" ng-model="submission.number">
+				  	<h5 class="want-con">C i t y</h5>
+				  	<input class="form-control" ng-model="submission.city">
+				  	<h5 class="want-con">S t a t e</h5>
+				  	<input class="form-control" ng-model="submission.state">
+				  	<button class="btn btn-primary" id="want-btn-submit" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample" ng-click="postSubmission(submission)">Submit</button>
+				</div>
+
+
+
 		      </div>
 		    </div>
 		  </div>
 		</div>	
 	</div>
 </div>
+
+
 
 
 

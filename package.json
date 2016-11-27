@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "^1.5.5",
+    "angular-animate": "^1.5.9",
+    "angular-aria": "^1.5.9",
+    "angular-material": "^1.1.1",
     "angular-route": "^1.5.7",
     "angular-ui-bootstrap": "^2.2.0",
     "bcryptjs": "^2.3.0",

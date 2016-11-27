@@ -5,10 +5,87 @@ body {
 	text-decoration: none;
 	color: black;
 }
-#brand {
+
+.top {
+	background-color: black;
+}
+
+.name-con {
+	text-align: center;
+	display: inline-block;
 	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+.left-strike {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	height: 1px;
+	width: 95px;
+	background-color: white;
+	margin-bottom: 10px;
+}
+#jen {
+	display: inline-block;
+	font-family: "Times New Roman", Georgia, Serif;
+	margin: 0px;
+	padding: 0px;
+	color: white;
+}
+.right-strike {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	height: 1px;
+	width: 95px;
+	background-color: white;
+	margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+.brand-con {
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+}
+.brand-sep {
+	display: inline-block;
+	height: 15px;
+	width: 1px;
+	background-color: white;
+	padding: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.name-strike {
+	width: 240px;
+	height: 1px;
+	margin: auto;
+	background-color: white;
+	margin: auto;
+	padding: 0px;
+}
+
+
+
+
+
+
+
+#brand {
 	text-align: center;
 	font-family: "Times New Roman", Georgia, Serif;
+	margin: 0px;
+	padding: 0px;
+	display: inline-block;
+	color: white;
 }
 #logo {
 	font-family: "Times New Roman", Georgia, Serif;
@@ -18,6 +95,8 @@ body {
 	height: 1px;
 	margin: auto;
 	background-color: black;
+	margin: 0px;
+	padding: 0px;
 }
 .navbar {
 	background-color: white;
@@ -134,13 +213,6 @@ body {
 .item-con {
 	font-family: "Times New Roman", Georgia, Serif;
 }
-#photo1 {
-	position: relative;
-	margin: 0px;
-	padding: 0px;
-	border: 1px solid black;
-	height: 270px;
-}
 .photos-cont {
 	display: inline-block;
 	height: 100px;
@@ -208,7 +280,20 @@ form .progress {
 #item-pic {
 	position: relative;
 	width: 100%;
-	height: 290px;
+	height: 310px;
+}
+#inventory-pic {
+	position: relative;
+	height: 270px;
+	width: 270px;
+}
+#item-pics {
+	position: relative;
+	height: 270px;
+	width: 270px;
+}
+.modal-body {
+	text-align: center;
 }
 
 #item-conti {
@@ -223,14 +308,14 @@ form .progress {
 	float: right;
 	height: 40px;
 	display: inline-block;
-	background-color: black;
-	margin-top: 250px;
+	background-color: white;
+	margin-top: 270px;
 	opacity: 0.7;
 	border-top-left-radius: 15px;
 }
 .item-cont {
 	display: inline-block;
-	color: white;
+	color: black;
 	text-align: center;	
 }
 #height {
@@ -251,7 +336,8 @@ form .progress {
 
 }
 #price {
-	color: #00ff00;
+	color: black;
+	font-weight: bolder;
 	padding-top: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -259,14 +345,116 @@ form .progress {
 .price-con {
 	display: inline-block;
 	height: 45px;
-	background-color: black;
+	background-color: white;
 	opacity: 0.7;
 	border-bottom-right-radius: 15px;
 	margin: 0px;
 	padding: 0px;
 }
 #idd {
+	/*float: left;*/
+}
+#photo1 {
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	height: 250px;
+	width: 250px;
+}
+.thumb-img {
+	width: 100%;
+	text-align: center;
+}
+#img-thumb-remove {
+	width: 250px;
+	border-radius: 0px;
+	background-color: white;
+	border: 1px solid red;
+	color: red;
+}
+.want-con {
 	float: left;
+}
+#want-btn {
+	width: 100%;
+	background-color: green;
+}
+.item-d-con {
+	width: 100%;
+	text-align: left;
+}
+#want-btn-submit {
+	width: 100%;
+	background-color: white;
+	margin-top: 15px;
+	color: green;
+	border: 1px solid green;
+}
+
+
+.ids {
+	width: 100%;
+	text-align: center;
+}
+
+/* slider testing */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 
